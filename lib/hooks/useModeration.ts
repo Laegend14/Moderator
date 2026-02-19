@@ -74,19 +74,23 @@ export function useArbiterLeaderboard() {
 
 /**
  * Hook to fetch the current user's reputation points.
+ * @param playerAddress - Optional address to fetch points for. If not provided, uses connected wallet address.
  */
-export function usePlayerPoints() {
+export function usePlayerPoints(playerAddress?: string) {
   const contract = useModeratorContract();
-  const { address, isConnected } = useWallet();
+  const { address: walletAddress, isConnected } = useWallet();
+  
+  // Use provided address or fall back to connected wallet address
+  const targetAddress = playerAddress || walletAddress;
 
   return useQuery<number, Error>({
-    queryKey: ["playerPoints", address],
+    queryKey: ["playerPoints", targetAddress],
     queryFn: async () => {
-      if (!contract || !address) return 0;
+      if (!contract || !targetAddress) return 0;
       // Note: Assumes SDK method getReputation is implemented
       // Adjust the method name based on your actual contract implementation
       try {
-        const reputation = await (contract as any).getReputation(address);
+        const reputation = await (contract as any).getReputation(targetAddress);
         return reputation || 0;
       } catch (err) {
         console.error("Failed to fetch player points:", err);
@@ -95,7 +99,7 @@ export function usePlayerPoints() {
     },
     refetchOnWindowFocus: true,
     staleTime: 10000,
-    enabled: !!contract && !!address && isConnected,
+    enabled: !!contract && !!targetAddress && (playerAddress ? true : isConnected),
   });
 }
 
