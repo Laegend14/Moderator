@@ -76,7 +76,7 @@ export function useArbiterLeaderboard() {
  * Hook to fetch the current user's reputation points.
  * @param playerAddress - Optional address to fetch points for. If not provided, uses connected wallet address.
  */
-export function usePlayerPoints(playerAddress?: string) {
+export function usePlayerPoints(playerAddress?: string | null) {
   const contract = useModeratorContract();
   const { address: walletAddress, isConnected } = useWallet();
   
