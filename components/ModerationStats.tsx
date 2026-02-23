@@ -116,7 +116,7 @@ export function ArbiterLeaderboard() {
               <div className="flex-shrink-0 text-right">
                 <div className="flex items-baseline gap-1 justify-end">
                   <span className="text-lg font-bold text-accent">
-                    {entry.points}
+                    {entry.reputation}
                   </span>
                   <span className="text-[10px] text-muted-foreground font-semibold uppercase">Rep</span>
                 </div>

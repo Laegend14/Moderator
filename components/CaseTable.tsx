@@ -112,7 +112,7 @@ interface CaseRowProps {
 }
 
 function CaseRow({ caseData, currentAddress, onArbitrate, isProcessing }: CaseRowProps) {
-  const isResolved = caseData.case_resolved;
+  const isResolved = caseData.verdict;
 
   return (
     <tr className="group hover:bg-white/5 transition-colors">
@@ -120,7 +120,7 @@ function CaseRow({ caseData, currentAddress, onArbitrate, isProcessing }: CaseRo
         <AddressDisplay address={caseData.id} maxLength={8} />
       </td>
       <td className="px-4 py-4 max-w-xs">
-        <p className="text-sm truncate font-medium">{caseData.incident_report}</p>
+        <p className="text-sm truncate font-medium">{caseData.incident}</p>
       </td>
       <td className="px-4 py-4">
         {isResolved ? (

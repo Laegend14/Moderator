@@ -40,7 +40,7 @@ export function Navbar() {
 
   // Rebranded Stats
   const totalCases = cases?.length || 0;
-  const closedCases = cases?.filter(c => c.case_resolved).length || 0;
+  const closedCases = cases?.filter(c => c.resolved).length || 0;
 
   return (
     <header
