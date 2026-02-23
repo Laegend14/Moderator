@@ -1,20 +1,22 @@
 /**
- * TypeScript types for GenLayer Fair and Transparent Moderation contract
+ * TypeScript types for GenLayer ModerationRegistry contract
  */
 
 export interface ModerationCase {
   id: string;
-  incident_report: string;  // Description or evidence link
-  community_rules: string;   // Ruleset provided for the AI judge
-  case_resolved: boolean;    // Status of the arbitration
-  verdict: string;           // "Dismissed", "Warning", "Temporary Ban", etc.
+  incident: string;          // Description of the incident (renamed from incident_report)
+  rules: string;             // Community rules being violated (renamed from community_rules)
+  verdict: string;           // "Dismissed", "Warning", "Temporary Ban", "Permanent Ban"
   reasoning: string;         // The AI's explanation for the verdict
-  owner: string;             // Address of the user/system that filed the report
+  status: string;            // "Under Review" or "Resolved"
+  resolved: boolean;         // Whether the case has been arbitrated
+  reporter: string;          // Address of the user who filed the report (renamed from owner)
+  filed_at: number;          // Block number when the case was filed
 }
 
 export interface ReputationEntry {
   address: string;
-  points: number;            // Reputation/Trust score (rebranded as 'Rep')
+  reputation: number;        // Reputation score (renamed from points for consistency)
 }
 
 export interface TransactionReceipt {
@@ -26,5 +28,5 @@ export interface TransactionReceipt {
 
 export interface CaseFilters {
   resolved?: boolean;
-  owner?: string;
+  reporter?: string;         // Renamed from owner to match new contract
 }
